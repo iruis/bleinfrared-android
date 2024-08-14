@@ -1,4 +1,4 @@
-package net.iruis.android.bleinfrared
+package net.iruis.android.bleinfrared.listener
 
 interface BluetoothUartServiceListener {
     fun requestPermissions(permissions: Array<String>)

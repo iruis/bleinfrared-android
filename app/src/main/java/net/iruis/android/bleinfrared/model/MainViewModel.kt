@@ -1,4 +1,4 @@
-package net.iruis.android.bleinfrared
+package net.iruis.android.bleinfrared.model
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

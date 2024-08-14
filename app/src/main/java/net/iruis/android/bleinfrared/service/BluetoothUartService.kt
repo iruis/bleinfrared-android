@@ -1,4 +1,4 @@
-package net.iruis.android.bleinfrared
+package net.iruis.android.bleinfrared.service
 
 import android.Manifest
 import android.annotation.SuppressLint
@@ -19,6 +19,9 @@ import android.os.Binder
 import android.os.Build
 import android.os.IBinder
 import android.util.Log
+import net.iruis.android.bleinfrared.BluetoothUartGattCallback
+import net.iruis.android.bleinfrared.listener.BluetoothUartConnectionListener
+import net.iruis.android.bleinfrared.listener.BluetoothUartServiceListener
 
 class BluetoothUartService : Service() {
     companion object {

@@ -1,10 +1,11 @@
-package net.iruis.android.bleinfrared
+package net.iruis.android.bleinfrared.converter
 
 import androidx.databinding.BindingAdapter
 import androidx.databinding.InverseBindingAdapter
 import androidx.databinding.InverseBindingListener
 import com.google.android.material.button.MaterialButtonToggleGroup
 import com.google.android.material.slider.Slider
+import net.iruis.android.bleinfrared.R
 import net.iruis.android.bleinfrared.model.AirConditionerModel
 
 class DataBindingConverters {

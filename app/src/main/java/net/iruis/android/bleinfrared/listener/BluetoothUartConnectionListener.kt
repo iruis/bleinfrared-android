@@ -1,4 +1,4 @@
-package net.iruis.android.bleinfrared
+package net.iruis.android.bleinfrared.listener
 
 import android.bluetooth.BluetoothGatt
 import android.bluetooth.BluetoothGattCharacteristic

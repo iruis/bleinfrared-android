@@ -14,6 +14,7 @@ import net.iruis.android.bleinfrared.Consts.Companion.CLIENT_UUID
 import net.iruis.android.bleinfrared.Consts.Companion.RX_UUID
 import net.iruis.android.bleinfrared.Consts.Companion.TX_UUID
 import net.iruis.android.bleinfrared.Consts.Companion.UART_UUID
+import net.iruis.android.bleinfrared.listener.BluetoothUartConnectionListener
 
 class BluetoothUartGattCallback(
     private val context: Context, private val listener: BluetoothUartConnectionListener

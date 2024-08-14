@@ -25,7 +25,7 @@
         android:theme="@style/Theme.BleInfrared"
         tools:targetApi="31">
 
-        <service android:name=".BluetoothUartService" />
+        <service android:name=".service.BluetoothUartService" />
 
         <activity
             android:name=".MainActivity"

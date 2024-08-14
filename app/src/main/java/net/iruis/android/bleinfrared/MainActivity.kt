@@ -19,7 +19,10 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayoutMediator
 import net.iruis.android.bleinfrared.adapter.DeviceViewPager2Adapter
 import net.iruis.android.bleinfrared.databinding.ActivityMainBinding
+import net.iruis.android.bleinfrared.listener.BluetoothUartServiceListener
 import net.iruis.android.bleinfrared.model.AirConditionerModel
+import net.iruis.android.bleinfrared.model.MainViewModel
+import net.iruis.android.bleinfrared.service.BluetoothUartService
 
 // reference
 // https://codereview.qt-project.org/c/qt/qtconnectivity/+/453298/15/src/android/bluetooth/src/org/qtproject/qt/android/bluetooth/QtBluetoothGattCharacteristic.java#26

@@ -12,10 +12,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import net.iruis.android.bleinfrared.BluetoothUartService
-import net.iruis.android.bleinfrared.InfraredDataListener
+import net.iruis.android.bleinfrared.service.BluetoothUartService
+import net.iruis.android.bleinfrared.listener.InfraredDataListener
 import net.iruis.android.bleinfrared.InfraredSpec
-import net.iruis.android.bleinfrared.MainViewModel
+import net.iruis.android.bleinfrared.model.MainViewModel
 import net.iruis.android.bleinfrared.databinding.FragmentTvBinding
 import net.iruis.android.bleinfrared.generator.TvGenerator
 import net.iruis.android.bleinfrared.model.TvModel

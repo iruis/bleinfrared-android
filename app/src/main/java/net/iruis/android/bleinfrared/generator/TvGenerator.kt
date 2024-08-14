@@ -1,6 +1,6 @@
 package net.iruis.android.bleinfrared.generator
 
-import net.iruis.android.bleinfrared.InfraredDataListener
+import net.iruis.android.bleinfrared.listener.InfraredDataListener
 import net.iruis.android.bleinfrared.InfraredSpec
 
 class TvGenerator(private val listener: InfraredDataListener) {
