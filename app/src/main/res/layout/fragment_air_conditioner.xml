@@ -1,0 +1,483 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".fragment.AirConditionerFragment">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <import type="net.iruis.android.bleinfrared.DataBindingConverters" />
+
+        <import type="net.iruis.android.bleinfrared.model.AirConditionerModel" />
+
+        <variable
+            name="model"
+            type="net.iruis.android.bleinfrared.model.AirConditionerModel" />
+
+        <variable
+            name="generator"
+            type="net.iruis.android.bleinfrared.generator.AirConditionerGenerator" />
+
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/ac_mode"
+                style="?textAppearanceHeadlineMedium"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/view_margin"
+                android:text="@string/ac_mode"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <HorizontalScrollView
+                android:id="@+id/ac_mode_scroll"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/view_margin"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ac_mode">
+
+                <com.google.android.material.button.MaterialButtonToggleGroup
+                    android:id="@+id/ac_mode_group"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:checkedButton="@={model.mode}"
+                    app:singleSelection="true">
+
+                    <Button
+                        android:id="@+id/ac_mode_fan"
+                        style="?attr/materialButtonOutlinedStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/ac_mode_fan" />
+
+                    <Button
+                        android:id="@+id/ac_mode_cool"
+                        style="?attr/materialButtonOutlinedStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/ac_mode_cool" />
+
+                    <Button
+                        android:id="@+id/ac_mode_dry"
+                        style="?attr/materialButtonOutlinedStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/ac_mode_dry" />
+
+                    <Button
+                        android:id="@+id/ac_mode_ai"
+                        style="?attr/materialButtonOutlinedStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/ac_mode_ai" />
+
+                </com.google.android.material.button.MaterialButtonToggleGroup>
+
+            </HorizontalScrollView>
+
+            <TextView
+                android:id="@+id/ac_fan_speed"
+                style="?textAppearanceHeadlineMedium"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/view_margin"
+                android:text="@string/ac_fan_speed"
+                android:visibility="@{model.mode == AirConditionerModel.Mode.Ai ? View.GONE : View.VISIBLE}"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ac_mode_scroll" />
+
+            <HorizontalScrollView
+                android:id="@+id/ac_fan_speed_scroll"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/view_margin"
+                android:visibility="@{model.mode == AirConditionerModel.Mode.Ai ? View.GONE : View.VISIBLE}"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ac_fan_speed">
+
+                <com.google.android.material.button.MaterialButtonToggleGroup
+                    android:id="@+id/ac_fan_speed_group"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:checkedButton="@={model.fanSpeed}"
+                    app:singleSelection="true">
+
+                    <Button
+                        android:id="@+id/ac_fan_speed_low"
+                        style="?attr/materialButtonOutlinedStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/ac_fan_speed_low" />
+
+                    <Button
+                        android:id="@+id/ac_fan_speed_medium"
+                        style="?attr/materialButtonOutlinedStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/ac_fan_speed_medium" />
+
+                    <Button
+                        android:id="@+id/ac_fan_speed_high"
+                        style="?attr/materialButtonOutlinedStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/ac_fan_speed_high" />
+
+                    <Button
+                        android:id="@+id/ac_fan_speed_nature"
+                        style="?attr/materialButtonOutlinedStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/ac_fan_speed_nature" />
+
+                </com.google.android.material.button.MaterialButtonToggleGroup>
+
+            </HorizontalScrollView>
+
+            <TextView
+                android:id="@+id/ac_temperature"
+                style="?textAppearanceHeadlineMedium"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/view_margin"
+                android:text="@string/ac_temperature"
+                android:visibility="@{model.mode == AirConditionerModel.Mode.Cool ? View.VISIBLE : View.GONE}"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ac_fan_speed_scroll" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/view_margin"
+                android:text="@{DataBindingConverters.convertIntToString(model.temperature)}"
+                android:visibility="@{model.mode == AirConditionerModel.Mode.Cool ? View.VISIBLE : View.GONE}"
+                app:layout_constraintBottom_toBottomOf="@id/ac_temperature"
+                app:layout_constraintRight_toRightOf="parent" />
+
+            <LinearLayout
+                android:id="@+id/ac_temperature_panel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/view_margin"
+                android:visibility="@{model.mode == AirConditionerModel.Mode.Cool ? View.VISIBLE : View.GONE}"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ac_temperature">
+
+                <Button
+                    android:id="@+id/ac_temperature_minus"
+                    style="?attr/materialIconButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:onClick="@{() -> model.temperatureDecrement()}"
+                    app:icon="@drawable/ic_remove_24dp" />
+
+                <com.google.android.material.slider.Slider
+                    android:id="@+id/ac_temperature_value"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:stepSize="1"
+                    android:value="@={model.temperature}"
+                    android:valueFrom="@{AirConditionerModel.TEMPERATURE_MIN}"
+                    android:valueTo="@{AirConditionerModel.TEMPERATURE_MAX}" />
+
+                <Button
+                    android:id="@+id/ac_temperature_plus"
+                    style="?attr/materialIconButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:onClick="@{() -> model.temperatureIncrement()}"
+                    app:icon="@drawable/ic_add_24dp" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/ac_ai"
+                style="?textAppearanceHeadlineMedium"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/view_margin"
+                android:text="@string/ac_ai"
+                android:visibility="@{model.mode == AirConditionerModel.Mode.Ai ? View.VISIBLE : View.GONE}"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ac_temperature_panel" />
+
+            <HorizontalScrollView
+                android:id="@+id/ac_ai_scroll"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/view_margin"
+                android:visibility="@{model.mode == AirConditionerModel.Mode.Ai ? View.VISIBLE : View.GONE}"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ac_ai">
+
+                <com.google.android.material.button.MaterialButtonToggleGroup
+                    android:id="@+id/ac_ai_group"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:checkedButton="@id/ac_ai_0"
+                    app:singleSelection="true">
+
+                    <Button
+                        android:id="@+id/ac_ai_n2"
+                        style="?attr/materialButtonOutlinedStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/ac_ai_n2" />
+
+                    <Button
+                        android:id="@+id/ac_ai_n1"
+                        style="?attr/materialButtonOutlinedStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/ac_ai_n1" />
+
+                    <Button
+                        android:id="@+id/ac_ai_0"
+                        style="?attr/materialButtonOutlinedStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/ac_ai_0" />
+
+                    <Button
+                        android:id="@+id/ac_ai_1"
+                        style="?attr/materialButtonOutlinedStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/ac_ai_1" />
+
+                    <Button
+                        android:id="@+id/ac_ai_2"
+                        style="?attr/materialButtonOutlinedStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/ac_ai_2" />
+
+                </com.google.android.material.button.MaterialButtonToggleGroup>
+
+            </HorizontalScrollView>
+
+            <TextView
+                android:id="@+id/ac_command"
+                style="?textAppearanceHeadlineSmall"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/view_margin"
+                android:text="@string/ac_command"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ac_ai_scroll" />
+
+            <HorizontalScrollView
+                android:id="@+id/ac_command_scroll"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/view_margin"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ac_command">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:divider="@drawable/linear_layout_divider_buttons"
+                    android:showDividers="middle">
+
+                    <Button
+                        android:id="@+id/ac_command_send"
+                        style="@style/Widget.Material3.Button.TonalButton"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:enabled="@{model.enabled}"
+                        android:onClick="@{() -> generator.common(model, false)}"
+                        android:text="@string/ac_command_send" />
+
+                    <Button
+                        android:id="@+id/ac_command_turbo"
+                        style="@style/Widget.Material3.Button.TonalButton"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:enabled="@{model.enabled}"
+                        android:onClick="@{() -> generator.turbo()}"
+                        android:text="@string/ac_command_turbo" />
+
+                    <Button
+                        android:id="@+id/ac_command_on"
+                        style="@style/Widget.Material3.Button.TonalButton"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:enabled="@{model.enabled}"
+                        android:onClick="@{() -> generator.common(model, true)}"
+                        android:text="@string/ac_command_power_on" />
+
+                    <Button
+                        android:id="@+id/ac_command_off"
+                        style="@style/Widget.Material3.Button.TonalButton"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:enabled="@{model.enabled}"
+                        android:onClick="@{() -> generator.powerOff()}"
+                        android:text="@string/ac_command_power_off" />
+
+                </LinearLayout>
+
+            </HorizontalScrollView>
+
+            <TextView
+                android:id="@+id/ac_toggle_energy_save"
+                style="?textAppearanceHeadlineSmall"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/view_margin"
+                android:text="@string/ac_toggle_energy_save"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ac_command_scroll" />
+
+            <LinearLayout
+                android:id="@+id/ac_toggle_energy_save_group"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/view_margin"
+                android:divider="@drawable/linear_layout_divider_buttons"
+                android:showDividers="middle"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ac_toggle_energy_save">
+
+                <Button
+                    android:id="@+id/ac_toggle_energy_save_on"
+                    style="@style/Widget.Material3.Button.TonalButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:enabled="@{model.enabled}"
+                    android:onClick="@{() -> generator.energySaving(true)}"
+                    android:text="@string/ac_toggle_on" />
+
+                <Button
+                    android:id="@+id/ac_toggle_energy_save_off"
+                    style="@style/Widget.Material3.Button.TonalButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:enabled="@{model.enabled}"
+                    android:onClick="@{() -> generator.energySaving(false)}"
+                    android:text="@string/ac_toggle_off" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/ac_toggle_swing_vertical"
+                style="?textAppearanceHeadlineSmall"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/view_margin"
+                android:text="@string/ac_toggle_swing_vertical"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ac_toggle_energy_save_group" />
+
+            <LinearLayout
+                android:id="@+id/ac_toggle_swing_vertical_group"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/view_margin"
+                android:divider="@drawable/linear_layout_divider_buttons"
+                android:showDividers="middle"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ac_toggle_swing_vertical">
+
+                <Button
+                    android:id="@+id/ac_toggle_swing_vertical_on"
+                    style="@style/Widget.Material3.Button.TonalButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:enabled="@{model.enabled}"
+                    android:onClick="@{() -> generator.swingVertical(true)}"
+                    android:text="@string/ac_toggle_on" />
+
+                <Button
+                    android:id="@+id/ac_toggle_swing_vertical_off"
+                    style="@style/Widget.Material3.Button.TonalButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:enabled="@{model.enabled}"
+                    android:onClick="@{() -> generator.swingVertical(false)}"
+                    android:text="@string/ac_toggle_off" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/ac_toggle_comfort_air"
+                style="?textAppearanceHeadlineSmall"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/view_margin"
+                android:text="@string/ac_toggle_comfort_air"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ac_toggle_swing_vertical_group" />
+
+            <LinearLayout
+                android:id="@+id/ac_toggle_comfort_air_group"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/view_margin"
+                android:divider="@drawable/linear_layout_divider_buttons"
+                android:showDividers="middle"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ac_toggle_comfort_air">
+
+                <Button
+                    android:id="@+id/ac_toggle_comfort_air_on"
+                    style="@style/Widget.Material3.Button.TonalButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:enabled="@{model.enabled}"
+                    android:onClick="@{() -> generator.comfortAir(true)}"
+                    android:text="@string/ac_toggle_on" />
+
+                <Button
+                    android:id="@+id/ac_toggle_comfort_air_off"
+                    style="@style/Widget.Material3.Button.TonalButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:enabled="@{model.enabled}"
+                    android:onClick="@{() -> generator.comfortAir(false)}"
+                    android:text="@string/ac_toggle_off" />
+
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+</layout>

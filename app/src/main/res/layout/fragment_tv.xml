@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".fragment.TvFragment">
+
+    <data>
+
+        <variable
+            name="model"
+            type="net.iruis.android.bleinfrared.model.TvModel" />
+
+        <variable
+            name="generator"
+            type="net.iruis.android.bleinfrared.generator.TvGenerator" />
+
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/vertical_center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.5" />
+
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/barrier_left"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:barrierDirection="left"
+                app:constraint_referenced_ids="left" />
+
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/barrier_right"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:barrierDirection="right"
+                app:constraint_referenced_ids="right" />
+
+            <Button
+                android:id="@+id/power"
+                style="@style/Widget.App.Button.TvButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:enabled="@{model.enabled}"
+                android:onClick="@{() -> generator.power()}"
+                android:text="Power"
+                app:layout_constraintLeft_toRightOf="@id/barrier_left"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/menu"
+                style="@style/Widget.App.Button.TvButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:enabled="@{model.enabled}"
+                android:onClick="@{() -> generator.menu()}"
+                android:text="Menu"
+                app:layout_constraintRight_toLeftOf="@id/barrier_right"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/up"
+                style="@style/Widget.App.Button.TvButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:enabled="@{model.enabled}"
+                android:onClick="@{() -> generator.up()}"
+                android:text="Up"
+                app:layout_constraintLeft_toLeftOf="@id/vertical_center"
+                app:layout_constraintRight_toRightOf="@id/vertical_center"
+                app:layout_constraintTop_toBottomOf="@id/power" />
+
+            <Button
+                android:id="@+id/left"
+                style="@style/Widget.App.Button.TvButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:enabled="@{model.enabled}"
+                android:onClick="@{() -> generator.left()}"
+                android:text="Left"
+                app:layout_constraintRight_toLeftOf="@id/up"
+                app:layout_constraintTop_toBottomOf="@id/up" />
+
+            <Button
+                android:id="@+id/right"
+                style="@style/Widget.App.Button.TvButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:enabled="@{model.enabled}"
+                android:onClick="@{() -> generator.right()}"
+                android:text="Right"
+                app:layout_constraintLeft_toRightOf="@id/up"
+                app:layout_constraintTop_toBottomOf="@id/up" />
+
+            <Button
+                android:id="@+id/down"
+                style="@style/Widget.App.Button.TvButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:enabled="@{model.enabled}"
+                android:onClick="@{() -> generator.down()}"
+                android:text="Down"
+                app:layout_constraintLeft_toRightOf="@id/left"
+                app:layout_constraintRight_toLeftOf="@id/right"
+                app:layout_constraintTop_toBottomOf="@id/ok" />
+
+            <Button
+                android:id="@+id/ok"
+                style="@style/Widget.App.Button.TvButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:enabled="@{model.enabled}"
+                android:onClick="@{() -> generator.ok()}"
+                android:text="OK"
+                app:layout_constraintLeft_toRightOf="@id/left"
+                app:layout_constraintRight_toLeftOf="@id/right"
+                app:layout_constraintTop_toBottomOf="@id/up" />
+
+            <Button
+                android:id="@+id/back"
+                style="@style/Widget.App.Button.TvButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:enabled="@{model.enabled}"
+                android:onClick="@{() -> generator.back()}"
+                android:text="Back"
+                app:layout_constraintLeft_toRightOf="@id/barrier_left"
+                app:layout_constraintTop_toBottomOf="@id/down" />
+
+            <Button
+                android:id="@+id/exit"
+                style="@style/Widget.App.Button.TvButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:enabled="@{model.enabled}"
+                android:onClick="@{() -> generator.exit()}"
+                android:text="Exit"
+                app:layout_constraintLeft_toLeftOf="@id/vertical_center"
+                app:layout_constraintRight_toRightOf="@id/vertical_center"
+                app:layout_constraintTop_toBottomOf="@id/down" />
+
+            <Button
+                android:id="@+id/mute"
+                style="@style/Widget.App.Button.TvButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:enabled="@{model.enabled}"
+                android:onClick="@{() -> generator.mute()}"
+                android:text="Mute"
+                app:layout_constraintRight_toLeftOf="@id/barrier_right"
+                app:layout_constraintTop_toBottomOf="@id/down" />
+
+            <Button
+                android:id="@+id/channel_up"
+                style="@style/Widget.App.Button.TvButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:enabled="@{model.enabled}"
+                android:onClick="@{() -> generator.channelUp()}"
+                android:text="CH +"
+                app:layout_constraintLeft_toRightOf="@id/barrier_left"
+                app:layout_constraintTop_toBottomOf="@id/back" />
+
+            <Button
+                android:id="@+id/channel_down"
+                style="@style/Widget.App.Button.TvButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:enabled="@{model.enabled}"
+                android:onClick="@{() -> generator.channelDown()}"
+                android:text="CH -"
+                app:layout_constraintLeft_toRightOf="@id/barrier_left"
+                app:layout_constraintTop_toBottomOf="@id/channel_up" />
+
+            <Button
+                android:id="@+id/volume_up"
+                style="@style/Widget.App.Button.TvButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:enabled="@{model.enabled}"
+                android:onClick="@{() -> generator.volumeUp()}"
+                android:text="VOL +"
+                app:layout_constraintRight_toLeftOf="@id/barrier_right"
+                app:layout_constraintTop_toBottomOf="@id/mute" />
+
+            <Button
+                android:id="@+id/volume_down"
+                style="@style/Widget.App.Button.TvButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:enabled="@{model.enabled}"
+                android:onClick="@{() -> generator.volumeDown()}"
+                android:text="VOL -"
+                app:layout_constraintRight_toLeftOf="@id/barrier_right"
+                app:layout_constraintTop_toBottomOf="@id/volume_up" />
+
+            <Button
+                android:id="@+id/external"
+                style="@style/Widget.App.Button.TvButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:enabled="@{model.enabled}"
+                android:onClick="@{() -> generator.externalInput()}"
+                android:text="External Input"
+                app:layout_constraintRight_toLeftOf="@id/barrier_right"
+                app:layout_constraintTop_toBottomOf="@id/volume_down" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+</layout>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".MainActivity"
+    tools:ignore="SpeakableTextPresentCheck">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <import type="net.iruis.android.bleinfrared.DataBindingConverters" />
+
+        <import type="net.iruis.android.bleinfrared.model.AirConditionerModel" />
+
+        <variable
+            name="airConditioner"
+            type="net.iruis.android.bleinfrared.model.AirConditionerModel" />
+
+        <variable
+            name="airConditionerGenerator"
+            type="net.iruis.android.bleinfrared.generator.AirConditionerGenerator" />
+
+    </data>
+
+    <LinearLayout
+        android:id="@+id/main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tab_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:tabMode="scrollable">
+
+        </com.google.android.material.tabs.TabLayout>
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/view_pager2"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+    </LinearLayout>
+
+</layout>

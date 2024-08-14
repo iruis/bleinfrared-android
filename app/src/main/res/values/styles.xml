@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Widget.App.Button.TvButton" parent="Widget.Material3.Button.TonalButton">
+        <item name="android:insetLeft">4dp</item>
+        <item name="android:insetRight">4dp</item>
+        <item name="android:layout_margin">4dp</item>
+    </style>
+
+</resources>

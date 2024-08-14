@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">무선 리모컨</string>
+    <string name="ac_mode_fan">송풍</string>
+    <string name="ac_mode_cool">냉방</string>
+    <string name="ac_mode_dry">제습</string>
+    <string name="ac_mode_ai">인공지능</string>
+    <string name="ac_mode">운전모드</string>
+    <string name="ac_fan_speed">풍량</string>
+    <string name="ac_fan_speed_low">약</string>
+    <string name="ac_fan_speed_medium">중</string>
+    <string name="ac_fan_speed_high">강</string>
+    <string name="ac_fan_speed_nature">자연풍</string>
+    <string name="ac_temperature">온도</string>
+    <string name="ac_ai">인공지능</string>
+    <string name="ac_ai_n2">-2 (더울때)</string>
+    <string name="ac_ai_n1">-1 (조금 더울때)</string>
+    <string name="ac_ai_0">0 (적당할때)</string>
+    <string name="ac_ai_1">1 (조금 추울때)</string>
+    <string name="ac_ai_2">2 (추울때)</string>
+    <string name="ac_command">운전</string>
+    <string name="ac_command_send">적용</string>
+    <string name="ac_command_turbo">터보</string>
+    <string name="ac_command_power_on">켜기</string>
+    <string name="ac_command_power_off">끄기</string>
+    <string name="ac_toggle_on">ON</string>
+    <string name="ac_toggle_off">OFF</string>
+    <string name="ac_toggle_energy_save">에너지 절약</string>
+    <string name="ac_toggle_swing_vertical">상하 바람</string>
+    <string name="ac_toggle_comfort_air">간접 바람</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
