@@ -20,7 +20,6 @@ import com.google.android.material.tabs.TabLayoutMediator
 import net.iruis.android.bleinfrared.adapter.DeviceViewPager2Adapter
 import net.iruis.android.bleinfrared.databinding.ActivityMainBinding
 import net.iruis.android.bleinfrared.listener.BluetoothUartServiceListener
-import net.iruis.android.bleinfrared.model.AirConditionerModel
 import net.iruis.android.bleinfrared.model.MainViewModel
 import net.iruis.android.bleinfrared.service.BluetoothUartService
 
@@ -54,11 +53,15 @@ class MainActivity : AppCompatActivity(), BluetoothUartServiceListener {
     private lateinit var binding: ActivityMainBinding
     private lateinit var preferences: SharedPreferences
     private lateinit var devicePagerAdapter: DeviceViewPager2Adapter
-    private lateinit var airConditionerModel: AirConditionerModel
 
-    private fun bluetoothPermissionRequest(requestPermissions: Array<String>) {
+    private val bluetoothPermissionRequest =
         registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
-            if (requestPermissions.all { !permissions.getOrDefault(it, false) }) {
+            if (BluetoothUartService.BLUETOOTH_PERMISSIONS.all {
+                    !permissions.getOrDefault(
+                        it,
+                        false
+                    )
+                }) {
                 val snackbar = Snackbar.make(binding.root, "권한이 거부되었습니다", Snackbar.LENGTH_LONG)
                 snackbar.setAction(android.R.string.ok) {
                     snackbar.dismiss()
@@ -67,8 +70,7 @@ class MainActivity : AppCompatActivity(), BluetoothUartServiceListener {
             } else {
                 localService?.resume()
             }
-        }.launch(requestPermissions)
-    }
+        }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         Log.i(TAG, "onCreate")
@@ -76,7 +78,6 @@ class MainActivity : AppCompatActivity(), BluetoothUartServiceListener {
 
         preferences = getSharedPreferences("${packageName}_preferences", Context.MODE_PRIVATE)
         devicePagerAdapter = DeviceViewPager2Adapter(supportFragmentManager, lifecycle)
-        airConditionerModel = AirConditionerModel(preferences)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         binding.viewPager2.adapter = devicePagerAdapter
@@ -92,11 +93,6 @@ class MainActivity : AppCompatActivity(), BluetoothUartServiceListener {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-    }
-
-    override fun onStart() {
-        Log.i(TAG, "onStart")
-        super.onStart()
 
         Intent(this, BluetoothUartService::class.java).also { intent ->
             bindService(intent, connection, Context.BIND_AUTO_CREATE)
@@ -127,7 +123,7 @@ class MainActivity : AppCompatActivity(), BluetoothUartServiceListener {
     }
 
     override fun requestPermissions(permissions: Array<String>) {
-        bluetoothPermissionRequest(permissions)
+        bluetoothPermissionRequest.launch(permissions)
     }
 
     override fun connected() {

@@ -5,24 +5,6 @@
     tools:context=".MainActivity"
     tools:ignore="SpeakableTextPresentCheck">
 
-    <data>
-
-        <import type="android.view.View" />
-
-        <import type="net.iruis.android.bleinfrared.converter.DataBindingConverters" />
-
-        <import type="net.iruis.android.bleinfrared.model.AirConditionerModel" />
-
-        <variable
-            name="airConditioner"
-            type="net.iruis.android.bleinfrared.model.AirConditionerModel" />
-
-        <variable
-            name="airConditionerGenerator"
-            type="net.iruis.android.bleinfrared.generator.AirConditionerGenerator" />
-
-    </data>
-
     <LinearLayout
         android:id="@+id/main"
         android:layout_width="match_parent"

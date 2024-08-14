@@ -133,7 +133,6 @@ class BluetoothUartService : Service() {
                 }
             })
         )
-        bluetoothScanner.stopScan(bluetoothScanCallback)
     }
 
     @SuppressLint("MissingPermission")
