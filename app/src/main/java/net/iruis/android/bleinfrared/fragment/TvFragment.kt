@@ -6,21 +6,18 @@ import android.content.Intent
 import android.content.ServiceConnection
 import android.os.Bundle
 import android.os.IBinder
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import net.iruis.android.bleinfrared.service.BluetoothUartService
-import net.iruis.android.bleinfrared.listener.InfraredDataListener
 import net.iruis.android.bleinfrared.InfraredSpec
-import net.iruis.android.bleinfrared.model.MainViewModel
 import net.iruis.android.bleinfrared.databinding.FragmentTvBinding
 import net.iruis.android.bleinfrared.generator.TvGenerator
+import net.iruis.android.bleinfrared.listener.InfraredDataListener
+import net.iruis.android.bleinfrared.model.MainViewModel
 import net.iruis.android.bleinfrared.model.TvModel
-import java.io.ByteArrayOutputStream
-import java.io.DataOutputStream
+import net.iruis.android.bleinfrared.service.BluetoothUartService
 
 class TvFragment : Fragment() {
     companion object {
@@ -62,7 +59,7 @@ class TvFragment : Fragment() {
         binding.model = tvModel
         binding.generator = TvGenerator(object : InfraredDataListener {
             override fun onInfraredData(data: ByteArray, spec: InfraredSpec) {
-                transmitInfraredCommand(data, spec)
+                localService.send(data, spec)
             }
         })
 
@@ -73,33 +70,5 @@ class TvFragment : Fragment() {
         )
 
         return binding.root
-    }
-
-    private fun transmitInfraredCommand(data: ByteArray, spec: InfraredSpec) {
-        Log.i(TAG, "transmitCoolCommand")
-
-        val stream = ByteArrayOutputStream()
-        val writer = DataOutputStream(stream)
-
-        writer.writeShort(BluetoothUartService.CONTROLLER_MAGIC)
-        writer.writeBoolean(spec.lsb)
-        writer.writeBoolean(spec.nibble)
-        writer.writeInt(spec.leadMark)
-        writer.writeInt(spec.leadSpace)
-        writer.writeInt(spec.oneMark)
-        writer.writeInt(spec.oneSpace)
-        writer.writeInt(spec.zeroMark)
-        writer.writeInt(spec.zeroSpace)
-        writer.writeInt(spec.endMark)
-        writer.writeInt(spec.endSpace)
-
-        val dataPut: (Byte) -> Unit = { value ->
-            writer.writeByte(value.toInt())
-        }
-        data.forEach { dataPut(it) }
-
-        writer.flush()
-
-        localService.send(stream.toByteArray())
     }
 }

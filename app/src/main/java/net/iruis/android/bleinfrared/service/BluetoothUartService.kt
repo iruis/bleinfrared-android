@@ -19,9 +19,12 @@ import android.os.Binder
 import android.os.Build
 import android.os.IBinder
 import android.util.Log
-import net.iruis.android.bleinfrared.BluetoothUartGattCallback
+import net.iruis.android.bleinfrared.InfraredSpec
+import net.iruis.android.bleinfrared.callback.BluetoothUartGattCallback
 import net.iruis.android.bleinfrared.listener.BluetoothUartConnectionListener
 import net.iruis.android.bleinfrared.listener.BluetoothUartServiceListener
+import java.io.ByteArrayOutputStream
+import java.io.DataOutputStream
 
 class BluetoothUartService : Service() {
     companion object {
@@ -135,23 +138,50 @@ class BluetoothUartService : Service() {
         )
     }
 
+    private fun generatePacket(data: ByteArray, spec: InfraredSpec): ByteArray {
+        val stream = ByteArrayOutputStream()
+        val writer = DataOutputStream(stream)
+
+        writer.writeShort(CONTROLLER_MAGIC)
+        writer.writeBoolean(spec.lsb)
+        writer.writeBoolean(spec.nibble)
+        writer.writeInt(spec.leadMark)
+        writer.writeInt(spec.leadSpace)
+        writer.writeInt(spec.oneMark)
+        writer.writeInt(spec.oneSpace)
+        writer.writeInt(spec.zeroMark)
+        writer.writeInt(spec.zeroSpace)
+        writer.writeInt(spec.endMark)
+        writer.writeInt(spec.endSpace)
+
+        val dataPut: (Byte) -> Unit = { value ->
+            writer.writeByte(value.toInt())
+        }
+        data.forEach { dataPut(it) }
+
+        writer.flush()
+
+        return stream.toByteArray()
+    }
+
     @SuppressLint("MissingPermission")
-    fun send(data: ByteArray) {
+    fun send(data: ByteArray, spec: InfraredSpec) {
         val gatt = this.gatt
         val gattTx = this.gattTx
         if (gatt == null || gattTx == null) {
             return
         }
 
+        val packet = generatePacket(data, spec)
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) {
             gattTx.writeType = BluetoothGattCharacteristic.WRITE_TYPE_DEFAULT
             @Suppress("DEPRECATION")
-            gattTx.value = data
+            gattTx.value = packet
             @Suppress("DEPRECATION")
             gatt.writeCharacteristic(gattTx)
         } else {
             gatt.writeCharacteristic(
-                gattTx, data, BluetoothGattCharacteristic.WRITE_TYPE_DEFAULT
+                gattTx, packet, BluetoothGattCharacteristic.WRITE_TYPE_DEFAULT
             )
         }
     }

@@ -1,4 +1,4 @@
-package net.iruis.android.bleinfrared
+package net.iruis.android.bleinfrared.callback
 
 import android.Manifest
 import android.bluetooth.BluetoothGatt

@@ -8,6 +8,8 @@ class AirConditionerGenerator(private val listener: InfraredDataListener) {
     private var spec = InfraredSpec()
 
     init {
+        // https://m.blog.naver.com/chandong83/221517795944
+        // https://github.com/Arduino-IRremote/Arduino-IRremote/blob/master/src/ir_LG.hpp
         spec.apply {
             lsb = false
             nibble = true
